@@ -1,0 +1,114 @@
+{
+    "id": "0c10f16fcda1b6e123f8d79a4fe1cde6",
+    "name": "Multimodal Routing API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "e438a84c05efcb809d6f9148a95e7b12",
+            "name": "Find a route.",
+            "url": "httpsapi.coord.co\/v1\/routing\/route",
+            "description": "Find possible trips between two points using either or both of bike-share and transit.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "origin_latitude",
+                    "description": "The latitude of the origin point.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "origin_longitude",
+                    "description": "The longitude of the origin point.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "destination_latitude",
+                    "description": "The latitude of the destination point.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "destination_longitude",
+                    "description": "The longitude of the destination point.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "modes",
+                    "description": "The modes we can use in returned trip options. If not set, we allow the use of any\nmode. Note that walking is always permitted.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "num_options",
+                    "description": "The maximum number of different trip options we should provide at once.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "priority",
+                    "description": "How we choose and sort the trip options. `soon` (the default) means we prioritize\ntrips that arrive the soonest. `few_transfers` means we prioritize trips that have\nfewer legs (and thus fewer changes in mode and fewer public transit transfers).\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "time",
+                    "description": "The time the trip starts or ends (depending on the `time_mode` flag), in ISO 8601\nformat. We use this time for finding the right public transit schedule to use.\n**Note that, regardless of the time, we will plan your trip based on current shared\nbike locations and availability!** By default, we assume the traveler wants to depart\nas soon as possible after you call the API.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "time_mode",
+                    "description": "Whether `time` is the requested departure time or the requested arrival time. Has no\neffect if `time` is not specified.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "bike_systems",
+                    "description": "A comma-separated list of bike systems (as named in the\n<a href=\"https:\/\/coord.co\/docs\/bike\" target=\"_blank\">bike share API<\/a>)\nto use when routing. If empty, we will allow the use of any bike system.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "0c10f16fcda1b6e123f8d79a4fe1cde6",
+            "rawModeData": ""
+        }
+    ]
+}
