@@ -1,0 +1,58 @@
+{
+    "id": "9c4b3c996c6e95b5c44d8f1e66de54bb",
+    "name": "Shared Vehicle (Bike+Scooter) API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "d463691ae5072306d1cb71a190e730ed",
+            "name": "Find Vehicles by location",
+            "url": "httpsapi.coord.co\/v1\/sv\/\/location",
+            "description": "Get locations in the requested search area, as a GeoJSON FeatureCollection.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "latitude",
+                    "description": "Latitude to return results for. Example: 40.742867.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "longitude",
+                    "description": "Longitude to return results for. Example: -73.98919.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "radius_km",
+                    "description": " Distance, in kilometers, from (latitude, longitude) we will return results for. Example: 0.25.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "9c4b3c996c6e95b5c44d8f1e66de54bb",
+            "rawModeData": ""
+        }
+    ]
+}
