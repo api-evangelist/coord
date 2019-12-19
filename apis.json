@@ -1,0 +1,193 @@
+{
+    "name": "Coord",
+    "description": "<p>Coord is a mobility company that creates seamless mobility and self-driving experiences today through deep integrations. The company offers bike-share API, Curbs API, Tolls API, Routing API and etc.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+    "tags": [
+        "bikes",
+        "general data",
+        "have api",
+        "parking",
+        "relative data",
+        "routes",
+        "service api",
+        "streams",
+        "tolls"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Shared Vehicle (Bike+Scooter) API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/shared-vehicle-bikescooter-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/shared-vehicle-bikescooter-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Curb Search API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/curb-search-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/curb-search-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Parking Access API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/parking-access-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/parking-access-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Users API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/users-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/users-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Tolls API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/tolls-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/tolls-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Bike Share API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bike-share-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bike-share-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Parking Search API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/parking-search-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/parking-search-api-openapi.json"
+                }
+            ]
+        },
+        {
+            "name": "Multimodal Routing API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/coord-logo.png",
+            "humanURL": "https:\/\/coord.co",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/multimodal-routing-api.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/multimodal-routing-api-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Blog",
+            "url": "https:\/\/medium.com\/coord"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "https:\/\/medium.com\/feed\/coord"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/coord.co\/docs\/"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/coord.co\/#pricing"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/coordcity"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/coord.co"
+        }
+    ]
+}
