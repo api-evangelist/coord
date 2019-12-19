@@ -1,0 +1,765 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Users API",
+        "description": "The Users API allows you to manage user data on the Coord platform. Sending user data to Coord\nallows you to **perform transactions with mobility systems** (like renting a bike, parking in\na parking lot, or booking a ride-hail trip) on behalf of that user using the Coord platform.\n\nThe requirements for performing a transaction for a given user vary depending on the system\nyou're connecting with. Some systems require particular data about a user in order for the\ntransaction to take place, and some systems require you to link a user's account. **All\ntransactions require you to authenticate the user using a JWT**.\n\nEvery Coord API that supports transactions has an endpoint for getting information about\nthat API's systems, along with what you need to provide for a user in order to perform a\ntransaction for them. The Users API provides tools that help you enable users to perform\ntransactions as well as tools for learning about the transactions that a user can already\nperform.\n\nRead on for m",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi.coord.co\/v1\/users"
+    ],
+    "paths": {
+        "\/create_jwt": {
+            "post": {
+                "summary": "Create JWT",
+                "description": "Create a JWT for accessing user-authenticated APIs.\n\nIf you currently are using an identity provider like Auth0 or Firebase or are generating\nyour own JWTs to manage your end users' idenitites, you shouldn't need to use this API\nmethod. Please contact sales@coord.co so that we can set you up to use your existing JWTs!\n\nOtherwise, as long as you have your own backend, you may instead call this API method to\ngenerate valid JWTs. Note that you must include both your access_key on the URL parameter\n",
+                "operationId": "JwtToken",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "A object with the `email` field set to the verified email of your end user.\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/testing\/create_jwt": {
+            "post": {
+                "summary": "Get JWT",
+                "description": "Create a **test** JWT for accessing user-authenticated APIs. Note that API calls made using\nsuch a JWT will be serviced by sandbox backends, so it's safe to start\/stop sessions, hail\nrides, and rent vehicles for testing purposes.\n\n** Do not send any real user info. This endpoint is here for testing only. **\n\nThe request body must contain an `email` field and optionally an `external_uid` field:\n\n```\n{\n  \"external_uid\": \"1234\",\n  \"email\": \"foo@bar.com\"\n}\n```\n\nThe response will contain an object wi",
+                "operationId": "JwtTestToken",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "A object with the `email` field set to the verified email of your end user.\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/testing\/user\/current\/transactable_systems": {
+            "post": {
+                "summary": "Simulate account linking for testing",
+                "description": "Link a test user account to a system. This endpoint simulates the account linking flow\noutlined in `\/user\/current\/link_account`. To link the test user's account with CitiBike,\nsend:\n\n```\n{\n  \"system_id\": \"CitiBike\",\n  \"linked_account\": true\n}\n```\n\nOn success, the response will be the same transactable system:\n```\n{\n  \"system_id\": \"CitiBike\",\n  \"linked_account\": true\n}\n```\n\nYou can also unlink a system by setting `linked_account` to `false` instead. The full list\nof the user's current transactabl",
+                "operationId": "TestLinkUserAccount",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "system",
+                        "in": "body",
+                        "description": "The system the user should be provisioned for."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/user\/current": {
+            "get": {
+                "summary": "Retrieve the current user",
+                "description": "Retrieves information about the currently logged in user, including any associated profile\ninformation, vehicle information, and provisioned systems.\n\nThe response will be the full User object:\n\n```\n  {\n    \"email\": \"user@domain.com\",\n    \"vehicle\": {\n      \"license_plate\": {\n        \"text\": \"123abc\",\n        \"country\": \"us\",\n        \"subdivision\": \"ny\"\n      }\n    }\n    \"transactable_systems\": [\n      {\n        \"system_id\": \"CitiBike\",\n        \"linked_account\": true\n      }\n    ]\n  }\n```\n",
+                "operationId": "GetUser",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/user\/current\/stripe_info": {
+            "post": {
+                "summary": "Update the user's stripe payment info",
+                "description": "Update the Stripe information associated with this user. You must call this endpoint in\norder for the current user to transact with a system that requires Stripe information. If\nthis is the case, the system's transaction_info will contain\n`stripe_info.stripe_customer_id` in the `users_api_fields` array.\n\nNote that it's not possible to call this endpoint for test users (using a test JWT) and as\nsuch we do not support test transactions for any system with the\nstripe_info.stripe_customer_id require",
+                "operationId": "PostStripeInfo",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "stripe_info",
+                        "in": "body",
+                        "description": "A `StripeInfo` object"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/user\/current\/vehicle": {
+            "put": {
+                "summary": "Update the current user's vehicle",
+                "description": "Update the vehicle information associated with the currently logged in user.\n\nThe request should contain a vehicle object:\n```\n  {\n    \"license_plate\": {\n      \"text\": \"123abc\",\n      \"country\": \"us\",\n      \"subdivision\": \"ny\"\n    }\n  }\n```\n\nOn success, the response will be the identical object:\n```\n  {\n    \"license_plate\": {\n      \"text\": \"123abc\",\n      \"country\": \"us\",\n      \"subdivision\": \"ny\"\n    }\n  }\n```\n",
+                "operationId": "PutVehicle",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "vehicle",
+                        "in": "body",
+                        "description": "A `Vehicle` object"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BikeLocationFeature": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationFeatureProperties": {
+                "type": "object",
+                "properties": {
+                    "is_renting": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_returning": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_reported": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lon": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_bikes_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_docks_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "region_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationList": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "CreateJWTRequest": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "external_uid": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "CreateJWTResponse": {
+                "type": "object",
+                "properties": {
+                    "jwt_token": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "message": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "InputUser": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LineString": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Money": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "currency": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "MultiPolygonGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "NamedLocation": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingCondition": {
+                "type": "object",
+                "properties": {
+                    "absolute_time_end_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_time_start_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_times": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingLocationMetadata": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "amenities": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_updated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "online_access_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "operator_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_zone": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRate": {
+                "type": "object",
+                "properties": {
+                    "absolute_end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "rate_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "until": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRule": {
+                "type": "object",
+                "properties": {
+                    "price_mechanism": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "spaces_total": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingSession": {
+                "type": "object",
+                "properties": {
+                    "billing_info": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Partner": {
+                "type": "object",
+                "properties": {
+                    "api_access_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "api_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "creation_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "first_login_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_provider": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prod_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "secret_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "whitelisted_domains": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Plate": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "text": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PointGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PricingRule": {
+                "type": "object",
+                "properties": {
+                    "end_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "minimum_hours_paid": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RedemptionInfo": {
+                "type": "object",
+                "properties": {
+                    "barcode": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lease_expiration_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "vehicle_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "StripeInfo": {
+                "type": "object",
+                "properties": {
+                    "coord_targeted_token": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_updated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "stripe_customer_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeAndDay": {
+                "type": "object",
+                "properties": {
+                    "day_of_year_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_of_year_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeRange": {
+                "type": "object",
+                "properties": {
+                    "max_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "min_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimestampedLatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "timestamp": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TransactableSystem": {
+                "type": "object",
+                "properties": {
+                    "linked_account": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TransactionRequirements": {
+                "type": "object",
+                "properties": {
+                    "jwt_claims": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "linked_account": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "users_api_fields": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "external_uid": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "first_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_test_user": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "phone_number": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "UserAndJWT": {
+                "type": "object",
+                "properties": {
+                    "jwt_token": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Vehicle": {
+                "type": "object",
+                "properties": {
+                    "license_plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            }
+        }
+    }
+}
