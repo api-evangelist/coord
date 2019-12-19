@@ -1,0 +1,248 @@
+{
+    "id": "ebec76777bcdb1aba9e79b56ba90895e",
+    "name": "Curb Search API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "f148ee3aa744ac569dbee9fa00306527",
+            "name": "Find the rules for all curbs within a bounding box.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bybounds\/all_rules",
+            "description": "Find the rules for all curbs within a bounding box..",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        },
+        {
+            "id": "8ebe6efacfdec3dca288f135233963be",
+            "name": "Find the rules for all curbs within a bounding box at a particular time.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bybounds\/time_rules",
+            "description": "Find the rules for all curbs within a bounding box at a particular time..",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "min_latitude",
+                    "description": "The smallest latitude to return results for. Example: 37.787.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "max_latitude",
+                    "description": "The largest latitude to return results for. Example: 37.8.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "min_longitude",
+                    "description": "The smallest longitude to return results for. Example: -122.417.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "max_longitude",
+                    "description": "The largest longitude to return results for. Example: -122.323.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        },
+        {
+            "id": "3800d4d3c4a53fba01c22a85a84842da",
+            "name": "Find the rules on single curb.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bycurb\/{id}\/all_rules",
+            "description": "Find the rules on single curb..",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        },
+        {
+            "id": "ad9daad237d25f8351bfbef3f69cccdd",
+            "name": "Find the rules on a single curb at a certain time.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bycurb\/{id}\/time_rules",
+            "description": "Find the rules on a single curb at a certain time..",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        },
+        {
+            "id": "db4afda164f3e98e49ad1927ed2a0511",
+            "name": "Find the rules for curbs near a location.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bylocation\/all_rules",
+            "description": "Find all of the curbs within a given radius of a particular point, and return all of their\nrules across all times of day, days of the week, times of year, etc.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "latitude",
+                    "description": "Latitude to return results for. Example: 47.606365.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "longitude",
+                    "description": "Longitude to return results for. Example: -122.334435.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "radius_km",
+                    "description": "Distance, in kilometers, from (latitude, longitude) we will return results for. Example: 0.1.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        },
+        {
+            "id": "ac702b4540141c9e00df97ba43b13161",
+            "name": "Find the rules for curbs near a location at a certain time.",
+            "url": "httpsapi.coord.co\/v1\/search\/curbs\/bylocation\/time_rules",
+            "description": "Find the rules for a given curb at a given time and on a given day. You can also use this\nto find all of the places that it is possible to perform a given action (for instance, find\nall the loading zones, or everywhere with two-hour parking).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "rawModeData": ""
+        }
+    ]
+}
