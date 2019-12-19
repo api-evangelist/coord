@@ -1,0 +1,867 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Bike Share API",
+        "description": "The Bike Share API is a comprehensive API that provides information about bike share\nsystems, including available bikes and prices.\n\nFor an example of how to use the Bike Share API, see the <a href=\"https:\/\/coord.co\/quickstart\/bike-share\" target=\"_blank\">Bike Share Guide<\/a>.\n\n## Example\n\n**Search for a bike**\n```\ncurl -G \"https:\/\/api.coord.co\/v1\/bike\/location?latitude=40.73935542&longitude=-73.99931783&radius_km=0.1&access_key=<your_api_key>\"\n```\n\nThe API methods allow you to search for available bikes and get quotes on bike rentals,\nas well as get detailed information about bike share systems and bike share locations.\n\nBike share systems have one or more locations. Since bikes in a bike share system may be in a\ndock or individually parked, a bike location can refer to either a dock or a single separately\nparked bike. Therefore, a search for bike locations is really a search for rideable bikes.\n\nBikes that are currently in-use or otherwise not ready for rental are not searchable throu",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi.coord.co\/v1\/bike"
+    ],
+    "paths": {
+        "\/location": {
+            "get": {
+                "summary": "Get bike locations in the requested search area, as a GeoJSON FeatureCollection.",
+                "description": "Get a list of locations given the input parameters. Specify a search area by radius around\na latitude and longitude, as well as any filter for specific systems. Each location will\nbe a GeoJSON Feature, and aggregated into a GeoJSON FeatureCollection.\n\n### Example\n\n#### Request:\n`curl -G \"https:\/\/api.coord.co\/v1\/bike\/location?latitude=40.742868&longitude=-73.989186&radius_km=0.25&access_key=\"`\n\n#### Response:\n```\n{\n  \"features\": [\n    {\n      \"geometry\": {\n        \"coordinates\": [\n          -73.9",
+                "operationId": "SearchLocations",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude to return results for."
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude to return results for."
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "description": "Distance, in kilometers, from (latitude, longitude) we will return results for.\n"
+                    },
+                    {
+                        "name": "system_ids",
+                        "in": "query",
+                        "description": "Comma separated list of the bike system IDs to include in the search."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/location\/{system_id}\/{location_id}": {
+            "get": {
+                "summary": "Get detailed information on a bike location, as a GeoJSON Feature.",
+                "description": "A bike location may be a single bike station (which can have multiple docked bikes) or a\nsingle dockless bike itself. All working docks are returned, but only free and rentable\ndockless bikes are returned.\n\n### Example\n\n#### Request:\n`curl -G \"https:\/\/api.coord.co\/v1\/bike\/location\/CitiBike\/482?access_key=\"`\n\n#### Response:\n```\n{\n  \"geometry\": {\n    \"coordinates\": [\n      -73.99931783,\n      40.73935542\n    ],\n    \"type\": \"Point\"\n  },\n  \"id\": \"CitiBike-482\",\n  \"properties\": {\n    \"is_renting\": tr",
+                "operationId": "GetBikeLocation",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/quote": {
+            "get": {
+                "summary": "Get the cost of renting a bike.",
+                "description": "Provide price quotes for renting a bike. There can be multiple quotes per system, reflecting\ndifferent options for buying membership such as single-ride, single-day, and multi-day\npasses. Please keep in mind that quotes are estimates.\n\n### Example\n\n#### Request:\n`curl -G \"https:\/\/api.coord.co\/v1\/bike\/quote?access_key=\"`\n\n#### Response:\n```\n[\n  {\n    \"cost\": {\n      \"amount\": 108,\n      \"currency\": \"USD\"\n    },\n    \"id\": 2,\n    \"max_days\": 1,\n    \"system_id\": \"CitiBike\",\n    \"tax_regions\": [{\n   ",
+                "operationId": "GetQuote",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "system_ids",
+                        "in": "query",
+                        "description": "Comma separated list of the bike system IDs to include in the search."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/system": {
+            "get": {
+                "summary": "Get information on all bike systems in an area, as a GeoJSON FeatureCollection.",
+                "description": "Bike systems are individual bike share systems, often per-region.\n\nInformation about each system is returned as a GeoJSON Feature, within a single GeoJSON\nFeatureCollection.\n\nSee the [\/system\/{system_id}](#reference\/0\/get-information-for-a-bike-system) call for more\ndetails on the individual system Features.\n\n### Example\n\n#### Request:\n`curl -G \"https:\/\/api.coord.co\/v1\/bike\/system?latitude=40.74286877312112&longitude=-73.98918628692627&radius_km=0.5&access_key=\"`\n\n#### Response:\n```\n{\n  \"feature",
+                "operationId": "SearchBikeSystems",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude to return results for."
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude to return results for."
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "description": "Distance, in kilometers, from (latitude, longitude) we will return results for.\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/system\/{system_id}": {
+            "get": {
+                "summary": "Get detailed information on a bike system, as a GeoJSON feature.",
+                "description": "Bike systems are individual bike share systems, often per-region.\n\nInformation is returned as a GeoJSON Feature. The geometry of the GeoJSON Feature is\na MultiPolygon that defines the system's operational area. All bike systems have an\noperational area, in which bikes may be found and parked.\nFor systems that require bikes be docked, this area is somewhat arbitrary, as bikes are\nonly found at stations. In this case, the operational area is roughly the city or\njurisdiction that the system covers.",
+                "operationId": "GetBikeSystem",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BikeLocationFeature": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationFeatureProperties": {
+                "type": "object",
+                "properties": {
+                    "is_renting": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_returning": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_reported": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lon": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_bikes_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_docks_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "region_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationList": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeSession": {
+                "type": "object",
+                "properties": {
+                    "create_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_location": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "pin": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "pin_expiration": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_location": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeSystemFeature": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeSystemFeatureCollection": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeSystemFeatureProperties": {
+                "type": "object",
+                "properties": {
+                    "brand": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "cities": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "email": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_transactable": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "phone_number": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "station_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "message": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LineString": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Money": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "currency": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "MultiPolygonGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "NamedLocation": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingCondition": {
+                "type": "object",
+                "properties": {
+                    "absolute_time_end_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_time_start_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_times": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingLocationMetadata": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "amenities": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_updated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "online_access_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "operator_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_zone": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRate": {
+                "type": "object",
+                "properties": {
+                    "absolute_end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "rate_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "until": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRule": {
+                "type": "object",
+                "properties": {
+                    "price_mechanism": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "spaces_total": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingSession": {
+                "type": "object",
+                "properties": {
+                    "billing_info": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Partner": {
+                "type": "object",
+                "properties": {
+                    "api_access_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "api_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "creation_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "first_login_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_provider": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prod_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "secret_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "whitelisted_domains": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PassInstance": {
+                "type": "object",
+                "properties": {
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "pass_type_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PassType": {
+                "type": "object",
+                "properties": {
+                    "charge_by_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_rides": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "tax_regions": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "usage_fees": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Plate": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "text": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PointGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PricingRule": {
+                "type": "object",
+                "properties": {
+                    "end_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "minimum_hours_paid": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RedemptionInfo": {
+                "type": "object",
+                "properties": {
+                    "barcode": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lease_expiration_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "vehicle_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "SessionCloseBody": {
+                "type": "object",
+                "properties": {
+                    "end_location": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TaxRegion": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "tax_rate": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeAndDay": {
+                "type": "object",
+                "properties": {
+                    "day_of_year_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_of_year_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeRange": {
+                "type": "object",
+                "properties": {
+                    "max_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "min_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimestampedLatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "timestamp": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TransactionRequirements": {
+                "type": "object",
+                "properties": {
+                    "jwt_claims": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "linked_account": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "users_api_fields": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "UsageFee": {
+                "type": "object",
+                "properties": {
+                    "fee_increment_seconds": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prorate_increment_seconds": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prorated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time_seconds": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Vehicle": {
+                "type": "object",
+                "properties": {
+                    "license_plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            }
+        }
+    }
+}
