@@ -1,0 +1,138 @@
+{
+    "id": "8c65e838ae5e8d895df5aad3d1fdf068",
+    "name": "Parking Search API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "12c00d8b2ad69d88af5a95075abb4644",
+            "name": "Get a list of off-street parking locations.",
+            "url": "httpsapi.coord.co\/v1\/search\/parking\/location",
+            "description": "Find all of the locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "latitude",
+                    "description": "Latitude to return results for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "longitude",
+                    "description": "Longitude to return results for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "radius_km",
+                    "description": "Distance, in kilometers, from (latitude, longitude) we will return\nresults for.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "duration_m",
+                    "description": "The expected length of time, in minutes, that the car will remain\nparked for. If not set, we won't return calculated prices.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "parking_start_time",
+                    "description": "The ISO-8601 formatted string representing the time when the vehicle will arrive at\nthe parking location. This changes which rules are in effect (for\ninstance, which garages are open) and may also alter the predicted\navailability of spaces. If blank, we will use the current time.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "location_ids",
+                    "description": "Comma separated list of the location IDs to include in the search.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "8c65e838ae5e8d895df5aad3d1fdf068",
+            "rawModeData": ""
+        },
+        {
+            "id": "b946120f7c2951594bcb075c6e314dd2",
+            "name": "Get a list of off-street parking locations.",
+            "url": "httpsapi.coord.co\/v1\/search\/parking\/location\/{id}",
+            "description": "Find a single locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "id",
+                    "description": "The ID of the parking location to retrieve",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "duration_m",
+                    "description": "The expected length of time, in minutes, that the car will remain\nparked for. If not set, we won't return calculated prices.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "parking_start_time",
+                    "description": "The ISO-8601 formatted string representing the time when the vehicle will arrive at\nthe parking location. This changes which rules are in effect (for\ninstance, which garages are open) and may also alter the predicted\navailability of spaces. If blank, we will use the current time.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "8c65e838ae5e8d895df5aad3d1fdf068",
+            "rawModeData": ""
+        }
+    ]
+}
