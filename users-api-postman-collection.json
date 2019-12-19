@@ -1,0 +1,234 @@
+{
+    "id": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+    "name": "Users API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "45c6d9e780239b8f239295891e5aabd3",
+            "name": "Create JWT",
+            "url": "httpsapi.coord.co\/v1\/users\/create_jwt",
+            "description": "Create a JWT for accessing user-authenticated APIs.\n\nIf you currently are using an identity provider like Auth0 or Firebase or are generating\nyour own JWTs to manage your end users' idenitites, you shouldn't need to use this API\nmethod. Please contact sales@coord.co so that we can set you up to use your existing JWTs!\n\nOtherwise, as long as you have your own backend, you may instead call this API method to\ngenerate valid JWTs. Note that you must include both your access_key on the URL parameter\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "request",
+                    "description": "A object with the `email` field set to the verified email of your end user.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        },
+        {
+            "id": "eebc87cabb83509222eae6b38a407e61",
+            "name": "Get JWT",
+            "url": "httpsapi.coord.co\/v1\/users\/testing\/create_jwt",
+            "description": "Create a **test** JWT for accessing user-authenticated APIs. Note that API calls made using\nsuch a JWT will be serviced by sandbox backends, so it's safe to start\/stop sessions, hail\nrides, and rent vehicles for testing purposes.\n\n** Do not send any real user info. This endpoint is here for testing only. **\n\nThe request body must contain an `email` field and optionally an `external_uid` field:\n\n```\n{\n  \"external_uid\": \"1234\",\n  \"email\": \"foo@bar.com\"\n}\n```\n\nThe response will contain an object wi",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "request",
+                    "description": "A object with the `email` field set to the verified email of your end user.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        },
+        {
+            "id": "9554cf567d00fa34c8ca18b86a4e48db",
+            "name": "Simulate account linking for testing",
+            "url": "httpsapi.coord.co\/v1\/users\/testing\/user\/current\/transactable_systems",
+            "description": "Link a test user account to a system. This endpoint simulates the account linking flow\noutlined in `\/user\/current\/link_account`. To link the test user's account with CitiBike,\nsend:\n\n```\n{\n  \"system_id\": \"CitiBike\",\n  \"linked_account\": true\n}\n```\n\nOn success, the response will be the same transactable system:\n```\n{\n  \"system_id\": \"CitiBike\",\n  \"linked_account\": true\n}\n```\n\nYou can also unlink a system by setting `linked_account` to `false` instead. The full list\nof the user's current transactabl",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "system",
+                    "description": "The system the user should be provisioned for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        },
+        {
+            "id": "731dbd2703d447547cafe596959fb766",
+            "name": "Retrieve the current user",
+            "url": "httpsapi.coord.co\/v1\/users\/user\/current",
+            "description": "Retrieves information about the currently logged in user, including any associated profile\ninformation, vehicle information, and provisioned systems.\n\nThe response will be the full User object:\n\n```\n  {\n    \"email\": \"user@domain.com\",\n    \"vehicle\": {\n      \"license_plate\": {\n        \"text\": \"123abc\",\n        \"country\": \"us\",\n        \"subdivision\": \"ny\"\n      }\n    }\n    \"transactable_systems\": [\n      {\n        \"system_id\": \"CitiBike\",\n        \"linked_account\": true\n      }\n    ]\n  }\n```\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        },
+        {
+            "id": "4f255cce1072a232a8719e4330326e0c",
+            "name": "Update the user's stripe payment info",
+            "url": "httpsapi.coord.co\/v1\/users\/user\/current\/stripe_info",
+            "description": "Update the Stripe information associated with this user. You must call this endpoint in\norder for the current user to transact with a system that requires Stripe information. If\nthis is the case, the system's transaction_info will contain\n`stripe_info.stripe_customer_id` in the `users_api_fields` array.\n\nNote that it's not possible to call this endpoint for test users (using a test JWT) and as\nsuch we do not support test transactions for any system with the\nstripe_info.stripe_customer_id require",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "stripe_info",
+                    "description": "A `StripeInfo` object",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        },
+        {
+            "id": "ea51d604d040574838ec62ba4b5c0030",
+            "name": "Update the current user's vehicle",
+            "url": "httpsapi.coord.co\/v1\/users\/user\/current\/vehicle",
+            "description": "Update the vehicle information associated with the currently logged in user.\n\nThe request should contain a vehicle object:\n```\n  {\n    \"license_plate\": {\n      \"text\": \"123abc\",\n      \"country\": \"us\",\n      \"subdivision\": \"ny\"\n    }\n  }\n```\n\nOn success, the response will be the identical object:\n```\n  {\n    \"license_plate\": {\n      \"text\": \"123abc\",\n      \"country\": \"us\",\n      \"subdivision\": \"ny\"\n    }\n  }\n```\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "vehicle",
+                    "description": "A `Vehicle` object",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access_key",
+                    "description": "The API access key for the request.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "2e5c81fd97a3f6153e6e71bbfdbaf6bf",
+            "rawModeData": ""
+        }
+    ]
+}
