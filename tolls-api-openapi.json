@@ -1,0 +1,895 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Tolls API",
+        "description": "The Tolls API is a read-only service to answer questions about the\nprices and locations of toll roads.\n\nSome tolls are charged at _single points_, so you pay them when you cross a\ntoll gate or pass a toll booth. Other tolls are _distance-based_: the amount\nthat you pay depends on where you enter a toll road and also where you\nexit. Some toll roads charge different prices by _time of day_, and some are\ntotally _dynamic_, changing their price depending on demand at a given time.\n\nNote that while we support distance based tolls that are applied using toll\ngates or booths, we currently do not support mileage-based user fees that\nare assessed based on odometer readings.\n\nWe provide toll information in four different ways:\n\n  * We can tell you how much you will pay based on your trip's GPS trajectory.\n    To find this out, use the [\/gps_trace](#reference\/0\/tolls-on-a-gps-trace) POST request.\n  * We can tell you how much you will pay to drive a given route.\n    To find this out, use the [\/rou",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi.coord.co\/v1\/search\/tolling"
+    ],
+    "paths": {
+        "\/gps_trace": {
+            "post": {
+                "summary": "Get toll rates corresponding to a sequence of timestamped GPS locations",
+                "description": "Returns information about the toll cost of a route given the GPS trace along the route.\n\nBelow is an example of a request:\n```json\n{\n  \"locations\": [\n    {\n      \"timestamp\": \"2017-07-28T17:39:00.000Z\",\n      \"lat\": 47.28348,\n      \"lng\": -122.56066\n    },\n    {\n      \"timestamp\": \"2017-07-28T17:39:30.000Z\",\n      \"lat\": 47.28154,\n      \"lng\": -122.56069\n    },\n    {\n      \"timestamp\": \"2017-07-28T17:40:00.000Z\",\n      \"lat\": 47.28000,\n      \"lng\": -122.56075\n    },\n    {\n      \"timestamp\": \"201",
+                "operationId": "GetCostForGpsTrace",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "A sequence of timestamped GPS locations in chronological order."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/route": {
+            "post": {
+                "summary": "Get all toll rates corresponding to a single route",
+                "description": "Returns information about the cost of a particular route due to tolls.\n\nBelow is an example of a route:\n```json\n{\n  \"departure_time\": \"2017-07-28T17:39:43.611Z\",\n  \"steps\": [\n    {\n      \"polyline\": [\n        {\"lat\": 47.28348, \"lng\": -122.56066},\n        {\"lat\": 47.28154, \"lng\": -122.56069},\n        {\"lat\": 47.28000, \"lng\": -122.56075},\n        {\"lat\": 47.27901, \"lng\": -122.56081},\n        {\"lat\": 47.27900, \"lng\": -122.56081},\n        {\"lat\": 47.27831, \"lng\": -122.56082},\n        {\"lat\": 47.2782",
+                "operationId": "GetCostForRoute",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "route",
+                        "in": "body",
+                        "description": "A description of the route being taken."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/toll": {
+            "get": {
+                "summary": "Get all tolls in an area defined by a center location and a radius",
+                "description": "Returns information on all tolls within a given radius.",
+                "operationId": "DetailsByArea",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude to return results for."
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude to return results for."
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "description": "Distance, in kilometers, from (`latitude`, `longitude`) we will return\nresults for.\n"
+                    },
+                    {
+                        "name": "return_geometry",
+                        "in": "query",
+                        "description": "Should we return geometry in the response?\n"
+                    },
+                    {
+                        "name": "return_price",
+                        "in": "query",
+                        "description": "Should we return prices in the response?\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/toll\/{id}": {
+            "get": {
+                "summary": "Get the details (e.g. pricing) of a toll specified by toll's ID",
+                "description": "Returns full pricing and location details for a single toll location\nacross all times, vehicle types, and payment methods.",
+                "operationId": "DetailsById",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the toll location to retrieve."
+                    },
+                    {
+                        "name": "return_geometry",
+                        "in": "query",
+                        "description": "Should we return geometry in the response?\n"
+                    },
+                    {
+                        "name": "return_price",
+                        "in": "query",
+                        "description": "Should we return prices in the response?\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BikeLocationFeature": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationFeatureProperties": {
+                "type": "object",
+                "properties": {
+                    "is_renting": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_returning": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_reported": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lon": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_bikes_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_docks_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "region_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationList": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "message": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "GeoJsonLineString": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LineString": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Money": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "currency": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "MultiPolygonGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "NamedLocation": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingCondition": {
+                "type": "object",
+                "properties": {
+                    "absolute_time_end_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_time_start_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_times": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingLocationMetadata": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "amenities": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_updated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "online_access_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "operator_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_zone": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRate": {
+                "type": "object",
+                "properties": {
+                    "absolute_end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "rate_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "until": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRule": {
+                "type": "object",
+                "properties": {
+                    "price_mechanism": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "spaces_total": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingSession": {
+                "type": "object",
+                "properties": {
+                    "billing_info": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Partner": {
+                "type": "object",
+                "properties": {
+                    "api_access_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "api_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "creation_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "first_login_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_provider": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prod_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "secret_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "whitelisted_domains": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PaymentMethod": {
+                "type": "object",
+                "properties": {
+                    "detail_url": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "details": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "issuing_agency": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Plate": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "text": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PointGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PricingRule": {
+                "type": "object",
+                "properties": {
+                    "end_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "minimum_hours_paid": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RedemptionInfo": {
+                "type": "object",
+                "properties": {
+                    "barcode": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lease_expiration_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "vehicle_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Route": {
+                "type": "object",
+                "properties": {
+                    "departure_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "steps": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RouteStep": {
+                "type": "object",
+                "properties": {
+                    "duration_s": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "encoded_polyline": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "polyline": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "road_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RouteToll": {
+                "type": "object",
+                "properties": {
+                    "checkpoints": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "dynamic": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "estimated_cross_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "optional": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "roadway_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeAndDay": {
+                "type": "object",
+                "properties": {
+                    "day_of_year_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_of_year_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeRange": {
+                "type": "object",
+                "properties": {
+                    "max_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "min_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimestampedLatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "timestamp": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Toll": {
+                "type": "object",
+                "properties": {
+                    "geometry": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "optional": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "permanently_closed": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "roadway_access_schedule": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "roadway_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "segments": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_zone": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TollByTraceRequest": {
+                "type": "object",
+                "properties": {
+                    "locations": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TollCheckPoint": {
+                "type": "object"
+            },
+            "TollRule": {
+                "type": "object",
+                "properties": {
+                    "not_allowed": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TollSchedule": {
+                "type": "object",
+                "properties": {
+                    "day_of_year_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_of_year_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days_of_week": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "dynamic": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TollSegment": {
+                "type": "object",
+                "properties": {
+                    "checkpoints": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "pricing": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TransactionRequirements": {
+                "type": "object",
+                "properties": {
+                    "jwt_claims": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "linked_account": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "users_api_fields": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Vehicle": {
+                "type": "object",
+                "properties": {
+                    "license_plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "VehicleType": {
+                "type": "object",
+                "properties": {
+                    "axles": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "detail_url": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "details": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "min_occupancy": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "motorcycle": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            }
+        }
+    }
+}
