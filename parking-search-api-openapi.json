@@ -1,0 +1,639 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Parking Search API",
+        "description": "The Parking Search API is a read-only service to answer questions\nabout where and when a person can park in lots and garages. For on-street parking,\nuse the Curbs API.\n\n**Finding Parking Locations**\n\nA place where you can park is called a **location**. This is usually either a surface parking\nlot or a parking garage. To find parking locations in a given area, use the\n[\/location](#reference\/0\/get-a-list-of-locations) request. This will return an object for each\n_open_ location in that area, ordered by distance.\n\nWhen we have live parking availability for a location, we will also fill in\n`availability_probability` for it. This represents the probability that there will be at least\n`threshold`% spaces available at the location. We find `availability_probability` a pretty\ngreat way to reason about parking locations which may have uncertainty around their\navailability, both at the current time and in the future when someone may be arriving after\na trip.\n\n**Getting Data on a Single Location*",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi.coord.co\/v1\/search\/parking"
+    ],
+    "paths": {
+        "\/location": {
+            "get": {
+                "summary": "Get a list of off-street parking locations.",
+                "description": "Find all of the locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
+                "operationId": "GetLocations",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude to return results for."
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude to return results for."
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "description": "Distance, in kilometers, from (latitude, longitude) we will return\nresults for.\n"
+                    },
+                    {
+                        "name": "duration_m",
+                        "in": "query",
+                        "description": "The expected length of time, in minutes, that the car will remain\nparked for. If not set, we won't return calculated prices.\n"
+                    },
+                    {
+                        "name": "parking_start_time",
+                        "in": "query",
+                        "description": "The ISO-8601 formatted string representing the time when the vehicle will arrive at\nthe parking location. This changes which rules are in effect (for\ninstance, which garages are open) and may also alter the predicted\navailability of spaces. If blank, we will use the current time.\n"
+                    },
+                    {
+                        "name": "location_ids",
+                        "in": "query",
+                        "description": "Comma separated list of the location IDs to include in the search."
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        },
+        "\/location\/{id}": {
+            "get": {
+                "summary": "Get a list of off-street parking locations.",
+                "description": "Find a single locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
+                "operationId": "GetLocation",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the parking location to retrieve"
+                    },
+                    {
+                        "name": "duration_m",
+                        "in": "query",
+                        "description": "The expected length of time, in minutes, that the car will remain\nparked for. If not set, we won't return calculated prices.\n"
+                    },
+                    {
+                        "name": "parking_start_time",
+                        "in": "query",
+                        "description": "The ISO-8601 formatted string representing the time when the vehicle will arrive at\nthe parking location. This changes which rules are in effect (for\ninstance, which garages are open) and may also alter the predicted\navailability of spaces. If blank, we will use the current time.\n"
+                    },
+                    {
+                        "name": "access_key",
+                        "in": "query",
+                        "description": "The API access key for the request."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BikeLocationFeature": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationFeatureProperties": {
+                "type": "object",
+                "properties": {
+                    "is_renting": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_returning": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_reported": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lon": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_bikes_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "num_docks_available": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "region_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "system_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "BikeLocationList": {
+                "type": "object",
+                "properties": {
+                    "features": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "message": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "LineString": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Money": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "currency": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "MultiPolygonGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "NamedLocation": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingCondition": {
+                "type": "object",
+                "properties": {
+                    "absolute_time_end_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_time_start_ts": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_times": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingLocation": {
+                "type": "object",
+                "properties": {
+                    "availability_probability": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "distance_km": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "rates": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingLocationMetadata": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "amenities": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "last_updated": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "online_access_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "operator_name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_zone": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRate": {
+                "type": "object",
+                "properties": {
+                    "absolute_end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "absolute_start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "arrival_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "departure_window_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "max_duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "rate_type": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "until": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingRule": {
+                "type": "object",
+                "properties": {
+                    "price_mechanism": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prices": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "spaces_total": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "ParkingSession": {
+                "type": "object",
+                "properties": {
+                    "billing_info": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "end_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "location_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Partner": {
+                "type": "object",
+                "properties": {
+                    "api_access_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "api_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "creation_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "first_login_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "is_provider": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "prod_enabled": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "secret_keys": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "whitelisted_domains": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Plate": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "text": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PointGeometry": {
+                "type": "object",
+                "properties": {
+                    "coordinates": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "type": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "PricingRule": {
+                "type": "object",
+                "properties": {
+                    "end_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "minimum_hours_paid": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_duration_h": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "RedemptionInfo": {
+                "type": "object",
+                "properties": {
+                    "barcode": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "duration_m": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lease_expiration_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "resource_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "start_time": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "status": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "user_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "vehicle_id": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeAndDay": {
+                "type": "object",
+                "properties": {
+                    "day_of_year_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "day_of_year_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "days": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_end": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "time_of_day_start": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimeRange": {
+                "type": "object",
+                "properties": {
+                    "max_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "min_value": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TimestampedLatLng": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "lng": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "timestamp": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "TransactionRequirements": {
+                "type": "object",
+                "properties": {
+                    "jwt_claims": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "linked_account": {
+                        "description": "",
+                        "type": "x-summary"
+                    },
+                    "users_api_fields": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            },
+            "Vehicle": {
+                "type": "object",
+                "properties": {
+                    "license_plate": {
+                        "description": "",
+                        "type": "x-summary"
+                    }
+                }
+            }
+        }
+    }
+}
