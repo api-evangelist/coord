@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Shared Vehicle (Bike+Scooter) API",
+        "description": "The Shared Vehicle API is a comprehensive API that provides information about bike and scooter share systems, including available vehicles and prices.",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi.coord.co\/v1\/sv\/"
+    ],
+    "paths": {
+        "\/location": {
+            "get": {
+                "summary": "Find Vehicles by location",
+                "description": "Get locations in the requested search area, as a GeoJSON FeatureCollection.",
+                "operationId": "FindVehiclesbyLocation",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude to return results for. Example: 40.742867."
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude to return results for. Example: -73.98919."
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "description": " Distance, in kilometers, from (latitude, longitude) we will return results for. Example: 0.25."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
