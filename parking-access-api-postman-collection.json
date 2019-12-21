@@ -1,5 +1,5 @@
 {
-    "id": "4a123ee1d21b5843cbe5453c4751df3a",
+    "id": "21fb895a4f6774f4a6388d04bbc657dd",
     "name": "Parking Access API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "9d9272c9f8f9a0a96e1e9e2117503c67",
+            "id": "8434c23d4a568121409e19037643442e",
             "name": "Retrieve a location's sessions",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/{location_id}\/session",
             "description": "Retrieve information about all existing sessions at a location.\n\nOn success, the response will be a list of existing sessions. At most one will still be\nactive:\n```\n  [\n    {\n      \"id\":1,\n      \"start_time\":\"2018-04-12T00:14:20.292Z\",\n      \"end_time\":\"2018-04-12T04:10:13.456Z\",\n      \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"id\":2,\n      \"start_time\":\"2018-04-12T00:14:20.292Z\",\n      \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n    }\n  ]\n```\n",
@@ -37,11 +37,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "54b444e8163849f676bb7e3f0064df08",
+            "id": "8dd9efc87e75319e94e7b15d3be20170",
             "name": "Create a new session",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/{location_id}\/session",
             "description": "Create a new session for the specified user at this location_id. Returns it with either\nthe start_time set, or a follow-on token (barcode, number, etc.) that the end user must use\nto initiate the session at the location.\n\nOn success, the response will be the newly created session:\n```\n  {\n    \"id\":1,\n    \"start_time\":\"2018-04-12T00:14:20.292Z\",\n    \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n  }\n```\n",
@@ -68,11 +68,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "d29cecfd2a99bae65b3cac29928292d2",
+            "id": "02384a0b094a964664483df31a65c54e",
             "name": "Retrieve an existing session",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/{location_id}\/session\/{session_id}",
             "description": "Retrieve information about an existing session. This is useful to determine if\/when an\nexisting session has been started or ended (via external, barcode mechanism, for example).\nIt may be polled to provide live feedback to an end user.\n\nOn success, the response will be the existing session:\n```\n  {\n    \"id\":1,\n    \"start_time\":\"2018-04-12T00:14:20.292Z\",\n    \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n  }\n```\n",
@@ -99,11 +99,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "be5010c7d43b19d5bc04f1455b7a6950",
+            "id": "f5d494fe11f48473a0ec810ee3f61a4d",
             "name": "End a previously started session",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/{location_id}\/session\/{session_id}\/end",
             "description": "End a previously started session. Note that it is invalid to call this method for sessions\nwhere checkout is controlled physically (those returned with a `redemption_info` field).\n\nOn success, the response will be the existing session with billing info:\n```\n  {\n    \"billing_info\": {\n      \"cost\": {\n        \"amount\": 100,\n        \"currency\": \"USD\"\n      }\n    },\n    \"end_time\": \"2018-04-12T00:17:50.161Z\",\n    \"id\":1,\n    \"start_time\":\"2018-04-12T00:14:20.292Z\",\n    \"user_id\":\"00000000-0000-0000-0",
@@ -130,11 +130,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "ceae5d73e80fc2b4a9e30bb85918ac6c",
+            "id": "ae6743cd3fdc05d41c2dbabaecc945fc",
             "name": "Create a barcode",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/barcode",
             "description": "Create a barcode for a user to be scanned upon entering\/exiting a parking lot.\n",
@@ -168,11 +168,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "1b4a48883974715e4859d5eeaf44ca6f",
+            "id": "4a9167a34a7184d139dc1eae28209f6d",
             "name": "Retrieve a user's sessions",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/session",
             "description": "Retrieve information about all of a user's existing sessions.\n\nOn success, the response will be a list of existing sessions. At most one will still be\nactive:\n```\n  [\n    {\n      \"id\":1,\n      \"start_time\":\"2018-04-12T00:14:20.292Z\",\n      \"end_time\":\"2018-04-12T04:10:13.456Z\",\n      \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n    },\n    {\n      \"id\":2,\n      \"start_time\":\"2018-04-12T00:14:20.292Z\",\n      \"user_id\":\"00000000-0000-0000-0000-000000000000\"\n    }\n  ]\n```\n",
@@ -199,11 +199,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         },
         {
-            "id": "df88db188a460c6d4354c6fef20169d5",
+            "id": "2901c09d38876df80e61ad62584f59ea",
             "name": "For test users only - Simulate a user redemption",
             "url": "httpsapi.coord.co\/v1\/access\/parking\/testing\/{location_id}\/{session_id}\/simulate_redemption",
             "description": "Some sessions don't automatically start when created. Instead, they are returned with\n`redemption_info`, which might be a barcode, for example, that needs to be scanned at the\ntarget location. For such sessions started by test users, you can use this method to\nsimulate a redemption (arrival+departure). The system will behave as though a user checked\nin at a location where the session was creationg at the time you make the call and checked\nout at a time `duration_m` minutes in the future. **This ",
@@ -237,7 +237,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "4a123ee1d21b5843cbe5453c4751df3a",
+            "collectionId": "21fb895a4f6774f4a6388d04bbc657dd",
             "rawModeData": ""
         }
     ]
