@@ -13,8 +13,8 @@
         "streams",
         "tolls"
     ],
-    "created": "2019-12-19",
-    "modified": "2019-12-19",
+    "created": "2019-12-20",
+    "modified": "2019-12-20",
     "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/apis.json",
     "specificationVersion": "0.14",
     "apis": [
@@ -32,7 +32,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/shared-vehicle-bikescooter-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/shared-vehicle-bikescooter-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/shared-vehicle-bikescooter-api-postman-collection.json"
                 }
             ]
         },
@@ -50,7 +54,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/curb-search-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/curb-search-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/curb-search-api-postman-collection.json"
                 }
             ]
         },
@@ -68,7 +76,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/parking-access-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/parking-access-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/parking-access-api-postman-collection.json"
                 }
             ]
         },
@@ -86,7 +98,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/users-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/users-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/users-api-postman-collection.json"
                 }
             ]
         },
@@ -104,7 +120,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/tolls-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/tolls-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/tolls-api-postman-collection.json"
                 }
             ]
         },
@@ -122,7 +142,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bike-share-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/bike-share-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/bike-share-api-postman-collection.json"
                 }
             ]
         },
@@ -140,7 +164,11 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/parking-search-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/parking-search-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/parking-search-api-postman-collection.json"
                 }
             ]
         },
@@ -158,13 +186,21 @@
                 },
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/multimodal-routing-api-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/multimodal-routing-api-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/coord\/master\/multimodal-routing-api-postman-collection.json"
                 }
             ]
         }
     ],
     "include": [],
     "x-common": [
+        {
+            "type": "APIs.json",
+            "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/apis.json"
+        },
         {
             "type": "Blog",
             "url": "https:\/\/medium.com\/coord"
