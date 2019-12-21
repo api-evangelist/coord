@@ -1,5 +1,5 @@
 {
-    "id": "0c10f16fcda1b6e123f8d79a4fe1cde6",
+    "id": "e9766cd3bc9d16d78ca00bcf81de0428",
     "name": "Multimodal Routing API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "e438a84c05efcb809d6f9148a95e7b12",
+            "id": "298b31d4c0d50fef37c343d21cacfd40",
             "name": "Find a route.",
             "url": "httpsapi.coord.co\/v1\/routing\/route",
             "description": "Find possible trips between two points using either or both of bike-share and transit.\n",
@@ -107,7 +107,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "0c10f16fcda1b6e123f8d79a4fe1cde6",
+            "collectionId": "e9766cd3bc9d16d78ca00bcf81de0428",
             "rawModeData": ""
         }
     ]
