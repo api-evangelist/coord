@@ -1,5 +1,5 @@
 {
-    "id": "ebec76777bcdb1aba9e79b56ba90895e",
+    "id": "8ffb735f6450d3410eac373eacea32b1",
     "name": "Curb Search API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "f148ee3aa744ac569dbee9fa00306527",
+            "id": "70ca052ac046896bba6e8a9dde53f964",
             "name": "Find the rules for all curbs within a bounding box.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bybounds\/all_rules",
             "description": "Find the rules for all curbs within a bounding box..",
@@ -37,11 +37,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         },
         {
-            "id": "8ebe6efacfdec3dca288f135233963be",
+            "id": "846f9b5b31272c1a1492651d9554a338",
             "name": "Find the rules for all curbs within a bounding box at a particular time.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bybounds\/time_rules",
             "description": "Find the rules for all curbs within a bounding box at a particular time..",
@@ -96,11 +96,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         },
         {
-            "id": "3800d4d3c4a53fba01c22a85a84842da",
+            "id": "634529cdc518a9435ec6258ec521f883",
             "name": "Find the rules on single curb.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bycurb\/{id}\/all_rules",
             "description": "Find the rules on single curb..",
@@ -127,11 +127,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         },
         {
-            "id": "ad9daad237d25f8351bfbef3f69cccdd",
+            "id": "e17ae0e610c81c83a149ac94fc86710f",
             "name": "Find the rules on a single curb at a certain time.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bycurb\/{id}\/time_rules",
             "description": "Find the rules on a single curb at a certain time..",
@@ -158,11 +158,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         },
         {
-            "id": "db4afda164f3e98e49ad1927ed2a0511",
+            "id": "9905bdce7743ccd50a685736c202ccc9",
             "name": "Find the rules for curbs near a location.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bylocation\/all_rules",
             "description": "Find all of the curbs within a given radius of a particular point, and return all of their\nrules across all times of day, days of the week, times of year, etc.\n",
@@ -210,11 +210,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         },
         {
-            "id": "ac702b4540141c9e00df97ba43b13161",
+            "id": "ed19835a3d185e9df80e3ba33df75dde",
             "name": "Find the rules for curbs near a location at a certain time.",
             "url": "httpsapi.coord.co\/v1\/search\/curbs\/bylocation\/time_rules",
             "description": "Find the rules for a given curb at a given time and on a given day. You can also use this\nto find all of the places that it is possible to perform a given action (for instance, find\nall the loading zones, or everywhere with two-hour parking).\n",
@@ -241,7 +241,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ebec76777bcdb1aba9e79b56ba90895e",
+            "collectionId": "8ffb735f6450d3410eac373eacea32b1",
             "rawModeData": ""
         }
     ]
