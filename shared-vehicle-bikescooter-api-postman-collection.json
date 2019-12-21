@@ -1,5 +1,5 @@
 {
-    "id": "9c4b3c996c6e95b5c44d8f1e66de54bb",
+    "id": "3361fd5c81ba8ae42f06e25180f01cd3",
     "name": "Shared Vehicle (Bike+Scooter) API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "d463691ae5072306d1cb71a190e730ed",
+            "id": "be534081e43bf34b95505033a9629151",
             "name": "Find Vehicles by location",
             "url": "httpsapi.coord.co\/v1\/sv\/\/location",
             "description": "Get locations in the requested search area, as a GeoJSON FeatureCollection.",
@@ -51,7 +51,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "9c4b3c996c6e95b5c44d8f1e66de54bb",
+            "collectionId": "3361fd5c81ba8ae42f06e25180f01cd3",
             "rawModeData": ""
         }
     ]
