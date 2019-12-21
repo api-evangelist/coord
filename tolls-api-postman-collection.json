@@ -1,5 +1,5 @@
 {
-    "id": "145eee43bc6a8822e68b87dc5f06967a",
+    "id": "432a6f7fb371c8987079256d903fba13",
     "name": "Tolls API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "a6f0f037a48c80948b057d283dda39cc",
+            "id": "105ff25fc12c44093d3bd265a9353cc4",
             "name": "Get toll rates corresponding to a sequence of timestamped GPS locations",
             "url": "httpsapi.coord.co\/v1\/search\/tolling\/gps_trace",
             "description": "Returns information about the toll cost of a route given the GPS trace along the route.\n\nBelow is an example of a request:\n```json\n{\n  \"locations\": [\n    {\n      \"timestamp\": \"2017-07-28T17:39:00.000Z\",\n      \"lat\": 47.28348,\n      \"lng\": -122.56066\n    },\n    {\n      \"timestamp\": \"2017-07-28T17:39:30.000Z\",\n      \"lat\": 47.28154,\n      \"lng\": -122.56069\n    },\n    {\n      \"timestamp\": \"2017-07-28T17:40:00.000Z\",\n      \"lat\": 47.28000,\n      \"lng\": -122.56075\n    },\n    {\n      \"timestamp\": \"201",
@@ -44,11 +44,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "145eee43bc6a8822e68b87dc5f06967a",
+            "collectionId": "432a6f7fb371c8987079256d903fba13",
             "rawModeData": ""
         },
         {
-            "id": "857a62d5475ba36c9ceb453f0fb0b03d",
+            "id": "7f820b17b0aa904d52e6a583a60b1011",
             "name": "Get all toll rates corresponding to a single route",
             "url": "httpsapi.coord.co\/v1\/search\/tolling\/route",
             "description": "Returns information about the cost of a particular route due to tolls.\n\nBelow is an example of a route:\n```json\n{\n  \"departure_time\": \"2017-07-28T17:39:43.611Z\",\n  \"steps\": [\n    {\n      \"polyline\": [\n        {\"lat\": 47.28348, \"lng\": -122.56066},\n        {\"lat\": 47.28154, \"lng\": -122.56069},\n        {\"lat\": 47.28000, \"lng\": -122.56075},\n        {\"lat\": 47.27901, \"lng\": -122.56081},\n        {\"lat\": 47.27900, \"lng\": -122.56081},\n        {\"lat\": 47.27831, \"lng\": -122.56082},\n        {\"lat\": 47.2782",
@@ -82,11 +82,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "145eee43bc6a8822e68b87dc5f06967a",
+            "collectionId": "432a6f7fb371c8987079256d903fba13",
             "rawModeData": ""
         },
         {
-            "id": "e4b3c8f6beb411daecf0c70e8c3851a5",
+            "id": "dc4df871ee0c40eedc092c23c88c9287",
             "name": "Get all tolls in an area defined by a center location and a radius",
             "url": "httpsapi.coord.co\/v1\/search\/tolling\/toll",
             "description": "Returns information on all tolls within a given radius.",
@@ -148,11 +148,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "145eee43bc6a8822e68b87dc5f06967a",
+            "collectionId": "432a6f7fb371c8987079256d903fba13",
             "rawModeData": ""
         },
         {
-            "id": "f21b2949add5c106cf4bdefc2efa63cf",
+            "id": "28887dd3eee559bf450b496cc4c42291",
             "name": "Get the details (e.g. pricing) of a toll specified by toll's ID",
             "url": "httpsapi.coord.co\/v1\/search\/tolling\/toll\/{id}",
             "description": "Returns full pricing and location details for a single toll location\nacross all times, vehicle types, and payment methods.",
@@ -200,7 +200,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "145eee43bc6a8822e68b87dc5f06967a",
+            "collectionId": "432a6f7fb371c8987079256d903fba13",
             "rawModeData": ""
         }
     ]
