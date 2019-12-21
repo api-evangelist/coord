@@ -1,5 +1,5 @@
 {
-    "id": "8c65e838ae5e8d895df5aad3d1fdf068",
+    "id": "a27d928edbcd864ea4aab9c72b174dd7",
     "name": "Parking Search API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "12c00d8b2ad69d88af5a95075abb4644",
+            "id": "0613e217f8f3cf5a2439f68fbd81c87c",
             "name": "Get a list of off-street parking locations.",
             "url": "httpsapi.coord.co\/v1\/search\/parking\/location",
             "description": "Find all of the locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
@@ -79,11 +79,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "8c65e838ae5e8d895df5aad3d1fdf068",
+            "collectionId": "a27d928edbcd864ea4aab9c72b174dd7",
             "rawModeData": ""
         },
         {
-            "id": "b946120f7c2951594bcb075c6e314dd2",
+            "id": "edbcafeec539571d342989bd1fccc4a6",
             "name": "Get a list of off-street parking locations.",
             "url": "httpsapi.coord.co\/v1\/search\/parking\/location\/{id}",
             "description": "Find a single locations within a given are and return their pricing information and\n(when present) availability. If the `duration_m` parameter is set, total cost for a stay\nof that duration will also be returned.\n",
@@ -131,7 +131,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "8c65e838ae5e8d895df5aad3d1fdf068",
+            "collectionId": "a27d928edbcd864ea4aab9c72b174dd7",
             "rawModeData": ""
         }
     ]
